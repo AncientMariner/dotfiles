@@ -143,7 +143,7 @@ return {
         neotest.run.stop()
         neotest.summary.open()
       end,
-      { noremap = true, silent = true, nowait = true, desc = "Run all test files"}
+      { noremap = true, silent = true, nowait = true, desc = "Stop run all test files"}
     )
 
     vim.keymap.set(
