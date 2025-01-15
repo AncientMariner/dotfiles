@@ -104,13 +104,13 @@ return {
 	    end, { desc = '[/] Fuzzily search in current buffer' })
 
 		map("n", "<leader>sf", builtin.find_files, {desc = "[s]earch [f]iles"})
-		map("n", "<leader>sg", builtin.git_files, {desc = "[s]earch [g]it"})
+		map("n", "<leader>sv", builtin.git_files, {desc = "[s]earch [v] git"})
 		map("n", "<leader>sd", builtin.diagnostics, {desc = "[s]earch [d]iagnostics"})
         
 		map('n', '<leader>sw', function() local word = vim.fn.expand("<cword>") builtin.grep_string({ search = word }) end, {desc ="[s]earch [w]ord"}) 
 		map('n', '<leader>sW', function() local word = vim.fn.expand("<cWORD>") builtin.grep_string({ search = word }) end, {desc ="[s]earch [W]ORD"})
 		map("n", "<leader>sp", function() builtin.grep_string({ search = vim.fn.input("Grep > ") }); end, {desc = "[s]earch [p]rompt"})
-        map("n", '<leader>sbg', builtin.live_grep, {noremap = true, silent = true, desc = "[s]earch by [g]rep"})
+        map("n", '<leader>sg', builtin.live_grep, {noremap = true, silent = true, desc = "[s]earch by [g]rep"})
 
 		map("n", "<leader>fx", builtin.treesitter, {noremap = true, silent = true, desc = "List tree sitter symbols"}) -- Lists tree-sitter symbols
         map("n", "<leader>fs", builtin.spell_suggest, {noremap = true, silent = true, desc = "Spelling suggestions"}) -- Lists spell options

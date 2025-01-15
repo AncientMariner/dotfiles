@@ -1,6 +1,7 @@
 function ColorMyPencils(color)
 	-- color = color or "rose-pine-moon"
 	color = color or "catppuccin"
+	-- color = color or "gruvbox"
 	vim.cmd.colorscheme(color)
 
 	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
@@ -18,6 +19,7 @@ return {
         name = "gruvbox",
         config = function()
             require("gruvbox").setup({
+				background = "light",
                 terminal_colors = true, -- add neovim terminal colors
                 undercurl = true,
                 underline = false,
@@ -34,8 +36,8 @@ return {
                 invert_signs = false,
                 invert_tabline = false,
                 invert_intend_guides = false,
-                inverse = true, -- invert background for search, diffs, statuslines and errors
-                contrast = "", -- can be "hard", "soft" or empty string
+                inverse = false, -- invert background for search, diffs, statuslines and errors
+                contrast = "hard", -- can be "hard", "soft" or empty string
                 palette_overrides = {},
                 overrides = {},
                 dim_inactive = false,
