@@ -119,21 +119,21 @@ return {
     local map_opts = { noremap = true, silent = true, nowait = true }
     vim.keymap.set(
       "n",
-      "<Leader>tfr",
+      "<Leader>tf",
       function()
         neotest.run.run(vim.fn.expand("%"))
       end,
-      { noremap = true, silent = true, nowait = true, desc = "Run current test file"}
+      { noremap = true, silent = true, nowait = true, desc = "Run current [t]est [f]ile"}
     )
 
     vim.keymap.set(
       "n",
-      "<Leader>tr",
+      "<Leader>tn",
       function()
         neotest.run.run()
         neotest.summary.open()
       end,
-      { noremap = true, silent = true, nowait = true, desc = "Run all test files"}
+      { noremap = true, silent = true, nowait = true, desc = "[T]est [n]earest test"}
     )
 
     vim.keymap.set(
@@ -143,7 +143,7 @@ return {
         neotest.run.stop()
         neotest.summary.open()
       end,
-      { noremap = true, silent = true, nowait = true, desc = "Stop run all test files"}
+      { noremap = true, silent = true, nowait = true, desc = "[T]est [S]top all"}
     )
 
     vim.keymap.set(
@@ -152,35 +152,35 @@ return {
       function()
         neotest.output.open({ last_run = true, enter = true })
       end,
-	  {desc = "Open test output"}
+	  {desc = "Open [t]est [o]utput"}
     )
 
-	-- debug nearest
 	vim.keymap.set(
       "n",
-      "<Leader>td",
+      "<Leader>tdn",
       function()
         neotest.run.run({strategy = "dap"})
       end,
-	  {desc = "Debug nearest test"}
+	  {desc = "[t]est [D]ebug [n]earest"}
     )
 
-	-- vim.keymap.set(
- --      "n",
- --      "<Leader>tra",
- --      function()
- --        neotest.run.run({vim.loop.cwd(), desc = "Run All Test Files")
- --      end
- --    )
+	vim.keymap.set(
+      "n",
+      "<Leader>ta",
+      function()
+        neotest.run.run({vim.loop.cwd()})
+      end,
+	  {desc = "[t]est run [a]ll"}
+    )
 
 	-- debug file
 	vim.keymap.set(
       "n",
-      "<Leader>tfd",
+      "<Leader>tdf",
       function()
         neotest.run.run({vim.fn.expand("%"), strategy = "dap"})
       end,
-	  {desc = "Debug current test file"}
+	  {desc = "[t]est [d]ebug current [f]ile"}
     )
 
     vim.keymap.set(
@@ -190,7 +190,7 @@ return {
         neotest.summary.toggle()
         -- u.resize_vertical_splits()
       end,
-      { noremap = true, silent = true, nowait = true, desc = "Toggle test summary"}
+      { noremap = true, silent = true, nowait = true, desc = "[T]oggle [t]est summary"}
     )
 
     -- vim.keymap.set(
@@ -214,7 +214,8 @@ return {
         neotest.run.run_last({ enter = true })
         neotest.output.open({ last_run = true, enter = true })
       end,
-      { noremap = true, silent = true, nowait = true, desc = "Run last test"}	
+      { noremap = true, silent = true, nowait = true, desc = "[T]est run [l]ast"}	
     )
   end
 }
+
