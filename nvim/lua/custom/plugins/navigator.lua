@@ -44,17 +44,17 @@ return {
             pattern = {"go"},
             callback = function(ev)
                 -- CTRL/control keymaps
-                vim.api.nvim_buf_set_keymap(0, "n", "<C-i>", ":GoImports<CR>", {desc = "Go Imports"})
-                vim.api.nvim_buf_set_keymap(0, "n", "<C-b>", ":GoBuild %:h<CR>", {desc = "Go Build"})
-                vim.api.nvim_buf_set_keymap(0, "n", "<C-t>", ":GoTestPkg<CR>", {desc = "Go Test Package"})
-                vim.api.nvim_buf_set_keymap(0, "n", "<C-p>", ":GoCoverage -p<CR>", {desc = "Go Coverage"})
-                vim.api.nvim_buf_set_keymap(0, "n", "<C-n>", ":GoRun<CR>", {desc = "Go Run"})
-                vim.api.nvim_buf_set_keymap(0, "n", "<C-f>", ":GoFmt<CR>", {desc = "Go Format"})
+                vim.api.nvim_buf_set_keymap(0, "n", "<leader>goi", ":GoImports<CR>", {desc = "Go Imports"})
+                vim.api.nvim_buf_set_keymap(0, "n", "<leader>gob", ":GoBuild %:h<CR>", {desc = "Go Build"})
+                vim.api.nvim_buf_set_keymap(0, "n", "<leader>got", ":GoTestPkg<CR>", {desc = "Go Test Package"})
+                vim.api.nvim_buf_set_keymap(0, "n", "<leader>goc", ":GoCoverage -p<CR>", {desc = "Go Coverage"})
+                vim.api.nvim_buf_set_keymap(0, "n", "<leader>gor", ":GoRun<CR>", {desc = "Go Run"})
+                vim.api.nvim_buf_set_keymap(0, "n", "<leader>gof", ":GoFmt<CR>", {desc = "Go Format"})
 
                 -- Opens test files
-                vim.api.nvim_buf_set_keymap(0, "n", "T", ":lua require('go.alternate').switch(true, '')<CR>", {desc = "Open test file"}) -- Test
-                vim.api.nvim_buf_set_keymap(0, "n", "U", ":lua require('go.alternate').switch(true, 'vsplit')<CR>", {desc = "Open test file in vert split"}) -- Test Vertical
-                vim.api.nvim_buf_set_keymap(0, "n", "S", ":lua require('go.alternate').switch(true, 'split')<CR>", {desc = "Open test file in horiz split"}) -- Test Split
+                vim.api.nvim_buf_set_keymap(0, "n", "<leader>goof", ":lua require('go.alternate').switch(true, '')<CR>", {desc = "Open test file"}) -- Test
+                vim.api.nvim_buf_set_keymap(0, "n", "<leader>goov", ":lua require('go.alternate').switch(true, 'vsplit')<CR>", {desc = "Open test file in vert split"}) -- Test Vertical
+                vim.api.nvim_buf_set_keymap(0, "n", "<leader>gooh", ":lua require('go.alternate').switch(true, 'split')<CR>", {desc = "Open test file in horiz split"}) -- Test Split
             end,
             group = vim.api.nvim_create_augroup("go_autocommands", {clear = true})
         })
