@@ -1,7 +1,7 @@
 function ColorMyPencils(color)
 	-- color = color or "rose-pine-moon"
-	color = color or "catppuccin"
-	-- color = color or "gruvbox"
+ 	color = color or "catppuccin"
+-- 	 color = color or "gruvbox"
 	vim.cmd.colorscheme(color)
 
 	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
@@ -52,7 +52,7 @@ return {
             require("tokyonight").setup({
                 -- your configuration comes here
                 -- or leave it empty to use the default settings
-                style = "storm", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+                style = "day", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
                 transparent = true, -- Enable this to disable setting the background color
                 terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
                 styles = {
