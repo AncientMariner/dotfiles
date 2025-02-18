@@ -31,13 +31,24 @@ return {
 				vimgrep_arguments = vimgrep_arguments,
                 sorting_strategy = "ascending",
                 layout_strategy = "horizontal",
-                layout_config = {prompt_position = "top"},
+				layout_config = {
+			      prompt_position = "top",
+				  preview_width = 0.65,
+				  horizontal = {
+					size = {
+					  width = "95%",
+					  height = "95%",
+					},
+				  },
+				},
                 mappings = {
                     i = {
 						['<C-u>'] = false,
 						['<C-d>'] = false,
                         ["<C-k>"] = actions.move_selection_previous, -- move to prev result
                         ["<C-j>"] = actions.move_selection_next, -- move to next result
+						-- ["<C-n>"] = agtions.cycle_history_next,
+						-- ["<C-p>"] = actions.cycle_history_previous,
 				--		["<C-Esc>"] = actions.close, -- close telescope
                         ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist, -- send selected to quickfixlist
 						["<C-h>"] = actions.which_key
@@ -66,9 +77,10 @@ return {
                     -- define mappings, e.g.
                     mappings = { -- extend mappings
                       i = {
-                        -- ["<C-p>"] = lga_actions.quote_prompt(),
-                        -- ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
-                        -- freeze the current list and start a fuzzy search in the frozen list
+						 -- "attestation" -tmd api
+                        ["<C-k>"] = lga_actions.quote_prompt(),
+							-- "attestation" --iglob **md**
+                        ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),                        -- freeze the current list and start a fuzzy search in the frozen list
                         ["<C-space>"] = actions.to_fuzzy_refine,
                       },
                     },
@@ -86,6 +98,9 @@ return {
         telescope.load_extension("live_grep_args")
 
         local builtin = require("telescope.builtin")
+
+		-- Enable telescope fzf native, if installed
+        pcall(require('telescope').load_extension, 'fzf')
 
         -- key maps
 
@@ -111,6 +126,7 @@ return {
 		map('n', '<leader>sW', function() local word = vim.fn.expand("<cWORD>") builtin.grep_string({ search = word }) end, {desc ="[s]earch [W]ORD"})
 		map("n", "<leader>sp", function() builtin.grep_string({ search = vim.fn.input("Grep > ") }); end, {desc = "[s]earch [p]rompt"})
         map("n", '<leader>sg', builtin.live_grep, {noremap = true, silent = true, desc = "[s]earch by [g]rep"})
+		map("n", "<leader>sG", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", {desc = "[s]earch by [G]rep arguments"})
 
 		map("n", "<leader>fx", builtin.treesitter, {noremap = true, silent = true, desc = "List tree sitter symbols"}) -- Lists tree-sitter symbols
         map("n", "<leader>fs", builtin.spell_suggest, {noremap = true, silent = true, desc = "Spelling suggestions"}) -- Lists spell options
