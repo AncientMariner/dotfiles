@@ -77,7 +77,7 @@ return {
 		vim.keymap.set('n', '<F9>', function() dap.continue() end, {desc = "Continue debug"})
 		vim.keymap.set('n', '<F8>', function() dap.step_over() end, {desc = "Step over"})
 		vim.keymap.set('n', '<F7>', function() dap.step_into() end, {desc = "Step into"})
-		vim.keymap.set('n', '<S-F7>', function() dap.step_out() end, {desc = "Step out"})
+		vim.keymap.set('n', '<F6>', function() dap.step_out() end, {desc = "Step out"})
 
 		vim.keymap.set('n', '<F3>', function() dap.toggle_breakpoint() end, {desc = "Toggle breakpoint"})
 		vim.keymap.set('n', '<F4>', function() dap.set_breakpoint() end, {desc = "Set breakpoint"})
