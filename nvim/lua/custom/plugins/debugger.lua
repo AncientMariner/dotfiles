@@ -71,30 +71,29 @@ return {
 
 		-- vim.fn.sign_define('DapBreakpoint', { text = '🔴', texthl='', linehl='Special', numhl='' })
 		vim.fn.sign_define('DapBreakpoint', { text ='🟥', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint'})
-		vim.fn.sign_define('DapStopped', { text ='▶️', texthl ='', linehl ='CursorLine', numhl =''})
+		vim.fn.sign_define('DapStopped', { text ='►', texthl ='', linehl ='CursorLine', numhl =''})
 
+		vim.keymap.set('n', '<Leader>dc', function() dap.continue() end, {desc = "Continue debug"})
+		vim.keymap.set('n', '<Leader>do', function() dap.step_over() end, {desc = "Step over"})
+		vim.keymap.set('n', '<Leader>di', function() dap.step_into() end, {desc = "Step into"})
+		vim.keymap.set('n', '<Leader>du', function() dap.step_out() end, {desc = "Step out"})
 
-		vim.keymap.set('n', '<F9>', function() dap.continue() end, {desc = "Continue debug"})
-		vim.keymap.set('n', '<F8>', function() dap.step_over() end, {desc = "Step over"})
-		vim.keymap.set('n', '<F7>', function() dap.step_into() end, {desc = "Step into"})
-		vim.keymap.set('n', '<F6>', function() dap.step_out() end, {desc = "Step out"})
-
-		vim.keymap.set('n', '<F3>', function() dap.toggle_breakpoint() end, {desc = "Toggle breakpoint"})
-		vim.keymap.set('n', '<F4>', function() dap.set_breakpoint() end, {desc = "Set breakpoint"})
-		vim.keymap.set('n', '<F2>', function() dap.terminate() end, {desc = "Terminate debug"})
+		vim.keymap.set('n', '<Leader>dv', function() dap.toggle_breakpoint() end, {desc = "Toggle breakpoint"})
+		vim.keymap.set('n', '<Leader>db', function() dap.set_breakpoint() end, {desc = "Set breakpoint"})
+		vim.keymap.set('n', '<Leader>dq', function() dap.terminate() end, {desc = "Terminate debug"})
 
 		vim.keymap.set('n', '<Leader>cb', function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, {desc = "Set breakpoint condition"})
 		vim.keymap.set('n', '<Leader>lb', function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, {desc = "Set breakpoint with message"})
 		vim.keymap.set('n', '<Leader>dr', function() dap.repl.open() end, {desc = "Repl open"})
-		vim.keymap.set('n', '<F5>', function() dap.run_last() end, {desc = "Run last"})
+		vim.keymap.set('n', '<Leader>dl', function() dap.run_last() end, {desc = "Run last"})
 
 		-- evaluate	
-		vim.keymap.set("n", "<Leader>dl", require("dap.ui.widgets").hover, {desc = "Evaluate under cursor"})
+		vim.keymap.set("n", "<Leader>de", require("dap.ui.widgets").hover, {desc = "Evaluate under cursor"})
 		vim.keymap.set('n', '<Leader>w', function() dapui.open() end, {desc = "Dap ui open"})
 		vim.keymap.set('n', '<Leader>W', function() dapui.close() end, {desc = "Dap ui close"})
 		vim.keymap.set("n", "<Leader>dC", function() dap.clear_breakpoints() end, {desc = "Clear breakpoints"})
 		-- Close debugger and clear breakpoints
-		vim.keymap.set("n", "<Leader>de", function()
+		vim.keymap.set("n", "<Leader>dQ", function()
 		  dap.clear_breakpoints()
 		  ui.toggle({})
 		  dap.terminate()
@@ -103,3 +102,4 @@ return {
 		end, {desc = "Clear debugger and breakpoints"})
     end,
 }
+
