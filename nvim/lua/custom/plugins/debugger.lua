@@ -71,7 +71,7 @@ return {
 
 		-- vim.fn.sign_define('DapBreakpoint', { text = '🔴', texthl='', linehl='Special', numhl='' })
 		vim.fn.sign_define('DapBreakpoint', { text ='🟥', texthl='DapBreakpoint', linehl='DapBreakpoint', numhl='DapBreakpoint'})
-		vim.fn.sign_define('DapStopped', { text ='►', texthl ='', linehl ='CursorLine', numhl =''})
+		vim.fn.sign_define('DapStopped', { text ='🦠', texthl ='', linehl ='CursorLine', numhl =''})
 
 		vim.keymap.set('n', '<Leader>dc', function() dap.continue() end, {desc = "Continue debug"})
 		vim.keymap.set('n', '<Leader>do', function() dap.step_over() end, {desc = "Step over"})
@@ -102,4 +102,3 @@ return {
 		end, {desc = "Clear debugger and breakpoints"})
     end,
 }
-
