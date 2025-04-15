@@ -33,7 +33,6 @@ return {
                 layout_strategy = "horizontal",
 				layout_config = {
 			      prompt_position = "top",
-				  preview_width = 0.65,
 				  horizontal = {
 					size = {
 					  width = "95%",
