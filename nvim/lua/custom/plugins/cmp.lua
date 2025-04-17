@@ -186,6 +186,24 @@ return {
         -- lspconfig["solargraph"].setup {}
 
         -- https://phpactor.readthedocs.io/en/master/usage/standalone.html#installation
+		-- brew uninstall hashicorp/tap/terraform-ls
         -- lspconfig["phpactor"].setup {}
+		-- lspconfig.terraformls.setup {
+		-- 	cmd = { "terraform-ls", "serve" },
+		-- 	filetypes = { "terraform", "tf", "hcl", "tfvars" },
+		-- 	-- root_dir = lspconfig.util.root_pattern(".terraform", ".git"),
+		-- 	root_dir = function(fname)
+		-- 		local root = lspconfig.util.root_pattern(".terraform", ".git")(fname)
+		-- 		-- print("Detected root_dir: " .. (root or "nil"))
+		-- 		return root
+		-- 	end,
+		--
+		-- }
+		-- vim.api.nvim_create_autocmd({"BufWritePre"}, {
+		-- 	pattern = {"*.tf", "*.tfvars"},
+		-- 	callback = function()
+		-- 		vim.lsp.buf.format()
+		-- 	end,
+		-- })
     end
 }
