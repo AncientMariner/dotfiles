@@ -22,7 +22,9 @@ return {
 				-- "ruby", 
 				"sql", 
 				-- "svelte", 
-				"yaml", "just", "vimdoc", "bash" 
+				"yaml", 
+				"just", 
+				"vimdoc", "bash" 
             },
             indent = {enable = true},
             auto_install = true,
