@@ -24,7 +24,7 @@ return {
 				-- "ruby", 
 				"sql", 
 				-- "svelte", 
-				"terraform",
+				-- "terraform",
 				"yaml", "just", 
 				"query", "vim", "vimdoc", "bash", "diff",
             },
