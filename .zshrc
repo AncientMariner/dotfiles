@@ -134,7 +134,7 @@ export NVM_DIR="$HOME/.nvm"
 # export PATH="/opt/homebrew/opt/node@16/bin:$PATH"
 
 export GOPATH=$HOME/go
-export GOROOT="$(brew --prefix golang)/libexec"
+export GOROOT="/usr/local/go"
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin:~/bin"
 # do not comment, needed to run apps from bin directory
 export PATH=$PATH:~/bin
