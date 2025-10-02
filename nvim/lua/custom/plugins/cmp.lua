@@ -172,7 +172,21 @@ return {
 	     capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
 
-        local lspconfig = require("lspconfig")
+
+		-- vim.lsp.config('*', {
+		--   capabilities = {
+		--     textDocument = {
+		--       semanticTokens = {
+		--         multilineTokenSupport = true,
+		--       }
+		--     }
+		--   },
+		--   root_markers = { '.git' },
+		-- })
+		--
+        -- deprecated old way local lspconfig = require("lspconfig")
+		-- vim.lsp.enable('gopls')
+		vim.lsp.enable('')
 
         -- All languages: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 
@@ -207,3 +221,4 @@ return {
 		-- })
     end
 }
+

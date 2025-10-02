@@ -19,4 +19,4 @@ vim.api.nvim_create_autocmd('FileType', {
 		setup_todo_highlight()
 	end,
 })
-
+-- vim.g.copilot_settings = { selectedCompletionModel = 'gpt-4o-copilot' }
