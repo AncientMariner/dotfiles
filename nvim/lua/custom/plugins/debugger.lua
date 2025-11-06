@@ -16,6 +16,7 @@ return {
 		 dapui.open()
 		end
 		dap.listeners.before.launch.dapui_config = function()
+		 require("smear_cursor").toggle()
 		 dapui.open()
 		end
 

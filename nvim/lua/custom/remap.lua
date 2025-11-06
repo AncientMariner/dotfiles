@@ -3,8 +3,10 @@ vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, {desc = "O[p]en [v] explorer"})
 
 vim.keymap.set("i", "jj", "<Esc>", {noremap=false})
 
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+-- vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+-- vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "<C-J>", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "<C-K>", ":m '<-2<CR>gv=gv")
 
 vim.keymap.set("n", "J", "mzJ`z")
 
@@ -137,5 +139,4 @@ vim.keymap.set("t", "<Esc>", function()
     terminal_state.is_open = false
   end
 end, { noremap = true, silent = true, desc = "Close floating terminal from terminal mode" })
-
 
