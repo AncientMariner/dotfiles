@@ -12,7 +12,7 @@ vim.opt.shiftwidth = 4
 vim.opt.swapfile = false
 vim.opt.backup = false
 -- vim.opt.undodir = OS.getenv("HOME") .. "~/.vim/undodir"
-vim.opt.undodir = "~/.vim/undodir"
+vim.opt.undodir = "full path to ~/.vim/undodir not with ~"
 vim.opt.undofile = true
 
 vim.opt.hlsearch = false
