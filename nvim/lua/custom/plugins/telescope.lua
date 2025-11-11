@@ -130,6 +130,8 @@ return {
 		map("n", "<leader>fx", builtin.treesitter, {noremap = true, silent = true, desc = "List tree sitter symbols"}) -- Lists tree-sitter symbols
         map("n", "<leader>fs", builtin.spell_suggest, {noremap = true, silent = true, desc = "Spelling suggestions"}) -- Lists spell options
 
+		map('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
+		map('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
 		map('n', '<leader>sh', builtin.help_tags, {desc = "[s]earch [h]elp"})
     end
 }
