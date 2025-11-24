@@ -1,5 +1,3 @@
-# tmux conf using https://github.com/gpakosz/.tmux/tree/master?tab=readme-ov-file#configuration
-# local fork https://github.com/AncientMariner/.tmux/blob/master/.tmux.conf.local
 # : << EOF
 # https://github.com/gpakosz/.tmux
 # (‑●‑●)> dual licensed under the WTFPL v2 license and the MIT license,
@@ -106,6 +104,9 @@ tmux_conf_theme_colour_vamp_black="#080808"
 tmux_conf_theme_colour_8="#080808"    # dark gray
 tmux_conf_theme_colour_9="#8d4004" # "#cc7722"  # "#ffff00"    # yellow
 tmux_conf_theme_colour_rust="#8d4004"
+tmux_conf_theme_colour_denim="#151e3d"
+tmux_conf_theme_colour_aegean="#1f456e"
+tmux_conf_theme_colour_prussian="#003153"
 tmux_conf_theme_colour_10="#7a3803" # "#ff00af"   # pink
 tmux_conf_theme_colour_spice="#7a3803"
 tmux_conf_theme_colour_11="#cc7722" # "#5fff00"   # green
@@ -118,6 +119,8 @@ tmux_conf_theme_colour_16="#00563f"  # "#420d09" # "#d70000"   # red
 tmux_conf_theme_colour_castleton_green="#00563f"
 tmux_conf_theme_colour_17="#e3dac9" # "#e4e4e4"   # white
 tmux_conf_theme_colour_bone_white="#e3dac9"
+tmux_conf_theme_colour_stone="#59788e"
+tmux_conf_theme_colour_cerulean="#0492c2"
 
 # default theme (ansi)
 #tmux_conf_theme_colour__1="colour0"
@@ -287,18 +290,19 @@ tmux_conf_theme_right_separator_sub='\uE0B3'  #   PowerlineSymbols.otf font, see
 #     - #{username_ssh}
 # tmux_conf_theme_status_left=" ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} "
 # tmux_conf_theme_status_left=" ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} | #{pretty_pane_current_path} "
-tmux_conf_theme_status_left=" ❐ #S | 🐈 | #{pretty_pane_current_path} "
+tmux_conf_theme_status_left=" ❐ #S | 🧊 | #{pretty_pane_current_path} "
+# tmux_conf_theme_status_left=" ❐ #S | 🐈🐋| #{pretty_pane_current_path} "
 # tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{username}#{root} | #{hostname} "
 tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},} | #(cd #{pane_current_path}; git rev-parse --abbrev-ref HEAD) | " # | #(weather) 
 
 # status left style
-tmux_conf_theme_status_left_fg="$tmux_conf_theme_colour_vamp_black,$tmux_conf_theme_colour_vamp_black,$tmux_conf_theme_colour_vamp_black"
-tmux_conf_theme_status_left_bg="$tmux_conf_theme_colour_rust,$tmux_conf_theme_colour_spice,$tmux_conf_theme_colour_ochre"
+tmux_conf_theme_status_left_fg="$tmux_conf_theme_colour_cerulean,$tmux_conf_theme_colour_stone,$tmux_conf_theme_colour_stone"
+tmux_conf_theme_status_left_bg="$tmux_conf_theme_colour_denim,$tmux_conf_theme_colour_aegean,$tmux_conf_theme_colour_prussian"
 tmux_conf_theme_status_left_attr="bold,none,none"
 
 # status right style
 tmux_conf_theme_status_right_fg="$tmux_conf_theme_colour_12,$tmux_conf_theme_colour_13,$tmux_conf_theme_colour_14"
-tmux_conf_theme_status_right_bg="$tmux_conf_theme_colour_catpc_mantle,$tmux_conf_theme_colour_castleton_green,$tmux_conf_theme_colour_bone_white"
+tmux_conf_theme_status_right_bg="$tmux_conf_theme_colour_catpc_mantle,$tmux_conf_theme_colour_lapis_lazuli,$tmux_conf_theme_colour_stone"
 tmux_conf_theme_status_right_attr="none,none,bold"
 
 # pairing indicator
@@ -340,7 +344,7 @@ tmux_conf_battery_bar_symbol_empty="◻"
 # battery bar length (in number of symbols), possible values are:
 #   - auto
 #   - a number, e.g. 5
-tmux_conf_battery_bar_length="7"
+tmux_conf_battery_bar_length="10"
 
 # battery bar palette, possible values are:
 #   - gradient (default)
@@ -419,6 +423,9 @@ set -g mode-keys vi
 # move status line to top/bottom
 set -g status-position top
 
+setw -g monitor-activity on
+set -g bell-action any
+
 # -- tpm -----------------------------------------------------------------------
 
 # while I don't use tpm myself, many people requested official support so here
@@ -456,9 +463,9 @@ tmux_conf_uninstall_plugins_on_reload=true
 # visit https://github.com/tmux-plugins for available plugins
 #set -g @plugin 'tmux-plugins/tmux-copycat'
 #set -g @plugin 'tmux-plugins/tmux-cpu'
-#set -g @plugin 'tmux-plugins/tmux-resurrect'
-#set -g @plugin 'tmux-plugins/tmux-continuum'
-#set -g @continuum-restore 'on'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-continuum'
+set -g @continuum-restore 'on'
 # tokyo-night-tmux
 
 # set -g @plugin "janoamaral/tokyo-night-tmux"
@@ -553,4 +560,3 @@ tmux_conf_uninstall_plugins_on_reload=true
 # "$@"
 # # /!\ do not remove the previous line
 # #     do not write below this line
-
