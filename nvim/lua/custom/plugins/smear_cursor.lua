@@ -19,11 +19,25 @@ return {
     -- See also `vertical_bar_cursor_insert_mode` and `distance_stop_animating_vertical_bar`.
     smear_insert_mode = false,
 
+	-- cursor_color = "#ed7014",
+	-- stiffness = 0.3,
+	-- trailing_stiffness = 0.1,
+	-- trailing_exponent = 5,
+	-- hide_target_hack = true,
+	-- gamma = 1,
+	
+	-- let it snow!
 	cursor_color = "#ed7014",
-	stiffness = 0.3,
-	trailing_stiffness = 0.1,
-	trailing_exponent = 5,
-	hide_target_hack = true,
-	gamma = 1,
+	gradient_exponent = 0,
+	particles_enabled = true,
+	particle_spread = 2,
+	particles_per_second = 100,
+	particles_per_length = 50,
+	particle_max_lifetime = 1100,
+	particle_max_initial_velocity = 100,
+	particle_velocity_from_cursor = 5,
+	particle_random_velocity = 300,
+	particle_damping = 0.2,
+	particle_gravity = 60,
 	},
 }
