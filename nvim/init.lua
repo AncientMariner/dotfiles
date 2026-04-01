@@ -1,6 +1,8 @@
-require("custom.default")
-require("custom.lazy")
-require("custom.remap")
+require("config")
+require("plugins")
+-- require("custom.default")
+-- require("custom.lazy")
+-- require("custom.remap")
 
 vim.fn.matchadd('TodoComment', 'Todo')
 vim.fn.matchadd('TodoComment', 'TODO')
