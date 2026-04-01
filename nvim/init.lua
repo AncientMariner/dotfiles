@@ -1,5 +1,5 @@
 require("config")
-require("plugins")
+-- require("plugin")
 -- require("custom.default")
 -- require("custom.lazy")
 -- require("custom.remap")
