@@ -64,10 +64,10 @@ wk.add({
 -- },
 
 	{
-		"<c-w>",
-		function()
-			require("which-key").show({ keys = "<c-w>", loop = true })
-		end,
-		desc = "Window Hydra Mode (which-key)",
+		-- "<c-w>",
+		-- function()
+		-- 	require("which-key").show({ keys = "<c-w>", loop = true })
+		-- end,
+		-- desc = "Window Hydra Mode (which-key)",
 	},
 })
