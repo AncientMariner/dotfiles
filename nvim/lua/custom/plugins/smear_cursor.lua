@@ -33,6 +33,7 @@ return {
 	particle_spread = 2,
 	particles_per_second = 100,
 	particles_per_length = 50,
+	-- particle_max_num = 200,
 	particle_max_lifetime = 1100,
 	particle_max_initial_velocity = 100,
 	particle_velocity_from_cursor = 5,
