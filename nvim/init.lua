@@ -1,8 +1,3 @@
-require("config")
--- require("plugin")
--- require("custom.default")
--- require("custom.lazy")
--- require("custom.remap")
 
 vim.fn.matchadd('TodoComment', 'Todo')
 vim.fn.matchadd('TodoComment', 'TODO')
@@ -22,3 +17,6 @@ vim.api.nvim_create_autocmd('FileType', {
 	end,
 })
 -- vim.g.copilot_settings = { selectedCompletionModel = 'gpt-4o-copilot' }
+
+require("config")
+require("plugins")
