@@ -111,3 +111,6 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.api.nvim_set_option_value("linebreak", true, {scope = "local"})
     end
 })
+
+vim.cmd("packadd nvim.undotree")
+vim.keymap.set("n", "<leader>u", require("undotree").open)
