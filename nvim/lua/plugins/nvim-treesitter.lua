@@ -1,8 +1,54 @@
-vim.pack.add({
-	"https://github.com/nvim-treesitter/nvim-treesitter",
-	"https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
-	"https://github.com/nvim-treesitter/nvim-treesitter-context",
-})
+-- Installation instructions for Neovim 0.12 with native package manager
+-- These plugins need to be manually cloned to the pack directory
+
+-- Run these commands in PowerShell/CMD to install the plugins:
+--[[
+# Navigate to your Neovim data directory
+cd $env:LOCALAPPDATA\nvim-data\site\pack\plugins\start
+# Create directory if needed
+New-Item -ItemType Directory -Force
+# Or on Unix-like systems (WSL, Git Bash):
+# cd ~/.local/share/nvim/site/pack/plugins/start
+
+# Clone the plugins
+git clone https://github.com/nvim-treesitter/nvim-treesitter
+git clone https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+git clone https://github.com/nvim-treesitter/nvim-treesitter-context
+
+# After cloning, restart Neovim
+]]
+
+-- Alternative: Use a plugin manager bootstrap script
+local function ensure_plugin(url, name)
+	local pack_path = vim.fn.stdpath("data") .. "/site/pack/plugins/start"
+	local plugin_path = pack_path .. "/" .. name
+	
+	if vim.fn.isdirectory(plugin_path) == 0 then
+		print("Installing " .. name .. "...")
+		vim.fn.mkdir(pack_path, "p")
+		local result = vim.fn.system({
+			"git", "clone", "--depth=1",
+			url,
+			plugin_path
+		})
+		if vim.v.shell_error ~= 0 then
+			print("Failed to clone " .. name)
+			print(result)
+			return false
+		end
+		vim.cmd("packloadall!")
+		return true
+	end
+	return true
+end
+
+-- Bootstrap the plugins
+ensure_plugin("https://github.com/nvim-treesitter/nvim-treesitter", "nvim-treesitter")
+ensure_plugin("https://github.com/nvim-treesitter/nvim-treesitter-textobjects", "nvim-treesitter-textobjects")
+ensure_plugin("https://github.com/nvim-treesitter/nvim-treesitter-context", "nvim-treesitter-context")
+
+-- Load the plugins
+vim.cmd("packloadall!")
 
 -- For Neovim 0.12+, use built-in treesitter configuration
 -- Enable treesitter highlighting globally
@@ -10,14 +56,6 @@ vim.g.treesitter_highlight_enable = true
 
 -- Setup treesitter after plugins are loaded
 vim.schedule(function()
-	-- First, check if nvim-treesitter plugin is available
-	local has_treesitter_plugin = vim.fn.isdirectory(vim.fn.stdpath("data") .. "/site/pack/*/start/nvim-treesitter") == 1
-	
-	if not has_treesitter_plugin then
-		print("nvim-treesitter plugin not found. Run :packloadall or restart Neovim")
-		return
-	end
-
 	-- Try to require treesitter configs
 	local ok_ts, ts_configs = pcall(require, "nvim-treesitter.configs")
 	
@@ -52,10 +90,10 @@ vim.schedule(function()
 				} 
 			}
 		})
+		print("nvim-treesitter configured successfully!")
 	else
-		print("nvim-treesitter.configs not available - using fallback configuration")
-		-- Fallback: use native treesitter without nvim-treesitter plugin config
-		vim.treesitter.language.register('go', 'go')
+		print("ERROR: nvim-treesitter.configs not available")
+		print("Please install nvim-treesitter manually - see comments at top of this file")
 	end
 
 	-- Setup treesitter-context
@@ -131,6 +169,11 @@ vim.api.nvim_create_user_command("TSDebug", function()
 	print("Highlighting active: " .. tostring(ts_enabled))
 	print("Treesitter module available: " .. tostring(pcall(require, "nvim-treesitter")))
 	print("Config module available: " .. tostring(pcall(require, "nvim-treesitter.configs")))
+	
+	-- Check plugin directory
+	local plugin_path = vim.fn.stdpath("data") .. "/site/pack/plugins/start/nvim-treesitter"
+	print("Plugin directory exists: " .. tostring(vim.fn.isdirectory(plugin_path) == 1))
+	print("Plugin path: " .. plugin_path)
 end, {})
 
 -- Command to manually enable treesitter highlighting
@@ -159,4 +202,13 @@ vim.api.nvim_create_user_command("TSInstallGo", function()
 	vim.cmd("TSInstall! go gomod gosum gowork")
 	print("Installing Go parsers... This may take a moment on Windows.")
 	print("After installation completes, restart Neovim or run :TSReload")
+end, {})
+
+-- Command to bootstrap/install treesitter if missing
+vim.api.nvim_create_user_command("TSBootstrap", function()
+	print("Bootstrapping nvim-treesitter...")
+	ensure_plugin("https://github.com/nvim-treesitter/nvim-treesitter", "nvim-treesitter")
+	ensure_plugin("https://github.com/nvim-treesitter/nvim-treesitter-textobjects", "nvim-treesitter-textobjects")
+	ensure_plugin("https://github.com/nvim-treesitter/nvim-treesitter-context", "nvim-treesitter-context")
+	print("Done! Restart Neovim for changes to take effect.")
 end, {})
