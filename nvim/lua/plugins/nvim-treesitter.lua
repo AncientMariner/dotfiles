@@ -87,44 +87,44 @@ vim.g.treesitter_highlight_enable = true
 -- Setup treesitter after plugins are loaded
 vim.schedule(function()
 	-- Try to require treesitter configs
-	local ok_ts, ts_configs = pcall(require, "nvim-treesitter.configs")
-	
-	if ok_ts and ts_configs then
-		ts_configs.setup({
-			ensure_installed = {
-				"csv", "dockerfile", "gitignore", "go", "gomod", "gosum",
-				"gowork", "javascript", "json", "lua", "markdown", 
-				"sql", "yaml", "vimdoc", "bash" 
-			},
-			auto_install = true,
-			sync_install = false,
-			highlight = {
-				enable = true,
-				disable = {"csv"},
-				additional_vim_regex_highlighting = false,
-			},
-			indent = { enable = true },
-			incremental_selection = {
-				enable = true,
-				keymaps = {
-					init_selection = "<c-space>",
-					node_incremental = "<c-space>",
-					scope_incremental = "<c-s>",
-					node_decremental = "<c-backspace>",
-				},
-			},
-			textobjects = { 
-				select = { 
-					enable = true, 
-					lookahead = true 
-				} 
-			}
-		})
-		print("nvim-treesitter configured successfully!")
-	else
-		print("ERROR: nvim-treesitter.configs not available")
-		print("Please install nvim-treesitter manually - see comments at top of this file")
-	end
+	-- local ok_ts, ts_configs = pcall(require, "nvim-treesitter.configs")
+	--
+	-- if ok_ts and ts_configs then
+	-- 	ts_configs.setup({
+	-- 		ensure_installed = {
+	-- 			"csv", "dockerfile", "gitignore", "go", "gomod", "gosum",
+	-- 			"gowork", "javascript", "json", "lua", "markdown", 
+	-- 			"sql", "yaml", "vimdoc", "bash" 
+	-- 		},
+	-- 		auto_install = true,
+	-- 		sync_install = false,
+	-- 		highlight = {
+	-- 			enable = true,
+	-- 			disable = {"csv"},
+	-- 			additional_vim_regex_highlighting = false,
+	-- 		},
+	-- 		indent = { enable = true },
+	-- 		incremental_selection = {
+	-- 			enable = true,
+	-- 			keymaps = {
+	-- 				init_selection = "<c-space>",
+	-- 				node_incremental = "<c-space>",
+	-- 				scope_incremental = "<c-s>",
+	-- 				node_decremental = "<c-backspace>",
+	-- 			},
+	-- 		},
+	-- 		textobjects = { 
+	-- 			select = { 
+	-- 				enable = true, 
+	-- 				lookahead = true 
+	-- 			} 
+	-- 		}
+	-- 	})
+	-- 	print("nvim-treesitter configured successfully!")
+	-- else
+	-- 	print("ERROR: nvim-treesitter.configs not available")
+	-- 	print("Please install nvim-treesitter manually - see comments at top of this file")
+	-- end
 
 	-- Setup treesitter-context
 	local ok_context, ts_context = pcall(require, "treesitter-context")

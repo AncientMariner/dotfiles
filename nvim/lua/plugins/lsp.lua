@@ -11,6 +11,7 @@ vim.pack.add({
 	"https://github.com/L3MON4D3/LuaSnip",
 	"https://github.com/saadparwaiz1/cmp_luasnip",
 	"https://github.com/j-hui/fidget.nvim",
+	"https://github.com/ray-x/lsp_signature.nvim",
 })
 
 -- Setup conform for formatting
@@ -18,6 +19,9 @@ require("conform").setup({
 	formatters_by_ft = {
 	}
 })
+-- lsp_signature setup
+require("lsp_signature").setup()
+
 
 local cmp = require('cmp')
 local cmp_lsp = require("cmp_nvim_lsp")
