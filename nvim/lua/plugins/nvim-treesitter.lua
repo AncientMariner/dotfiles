@@ -153,21 +153,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- Also try on BufEnter
-vim.api.nvim_create_autocmd("BufEnter", {
-	pattern = "*.go",
-	callback = function(args)
-		local buf = args.buf
-		if vim.treesitter.highlighter.active[buf] == nil then
-			vim.defer_fn(function()
-				if vim.api.nvim_buf_is_valid(buf) then
-					pcall(vim.treesitter.start, buf)
-				end
-			end, 100)
-		end
-	end,
-})
-
 vim.api.nvim_create_autocmd("PackChanged", {
 	desc = "Handle nvim-treesitter updates",
 	group = vim.api.nvim_create_augroup("nvim-treesitter-pack-changed-update-handler", { clear = true }),
