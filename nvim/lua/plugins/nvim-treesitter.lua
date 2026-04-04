@@ -10,6 +10,36 @@ New-Item -ItemType Directory -Force
 # Or on Unix-like systems (WSL, Git Bash):
 # cd ~/.local/share/nvim/site/pack/plugins/start
 
+For windows install
+1. Go to the Visual Studio downloads page:
+   - Visit: https://visualstudio.microsoft.com/downloads/
+2. Scroll down to "All Downloads"
+   - Expand the section "Tools for Visual Studio"
+   - Find "Build Tools for Visual Studio 2022" (or latest version)
+   - Click Download
+5. Make sure "Desktop development with C++" is checked:
+   - This is the workload checkbox on the left side
+   - It should install the MSVC compiler AND the Windows SDK (which contains stdlib.h)
+6. On the right side (Installation Details), verify these are included:
+   - MSVC v143 - VS 2022 C++ x64/x86 build tools
+   - Windows 11 SDK (or Windows 10 SDK)
+   - C++ core features
+
+1. Press the Windows key and search for:
+      Developer Command Prompt for VS 2022
+      OR
+      Developer PowerShell for VS 2022
+   
+2. Launch it (this sets up the compiler environment automatically)
+3. Verify the compiler is now available:
+      cl
+      You should see "Microsoft (R) C/C++ Optimizing Compiler" message
+4. Launch Neovim from this prompt:
+      nvim
+   
+5. Now try installing the Go parser:
+      :TSInstall go
+
 # Clone the plugins
 git clone https://github.com/nvim-treesitter/nvim-treesitter
 git clone https://github.com/nvim-treesitter/nvim-treesitter-textobjects
