@@ -12,6 +12,7 @@ return {
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
         "j-hui/fidget.nvim",
+		"onsails/lspkind-nvim",
     },
 
     config = function()
@@ -100,6 +101,47 @@ return {
             }
         })
 
+        local cmp = require("cmp")
+        local lspkind = require("lspkind")
+		--
+        cmp.setup({
+            snippet = {
+                expand = function(args)
+                    luasnip.lsp_expand(args.body)
+                end
+            },
+            window = {
+                completion = cmp.config.window.bordered(),
+                documentation = cmp.config.window.bordered()
+            },
+            mapping = cmp.mapping.preset.insert({
+                ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+                ["<C-f>"] = cmp.mapping.scroll_docs(4),
+                ["<C-Space>"] = cmp.mapping.complete(),
+                ["<C-e>"] = cmp.mapping.abort(),
+                ["<CR>"] = cmp.mapping.confirm({select = true}),
+                ["<Tab>"] = cmp.mapping(function(fallback)
+                    if cmp.visible() then
+                        cmp.select_next_item()
+                    elseif luasnip.locally_jumpable(1) then
+                        luasnip.jump(1)
+                    else
+                        fallback()
+                    end
+                end, {"i", "s"})
+            }),
+            sources = cmp.config.sources({
+                {name = "nvim_lsp"}, {name = "luasnip"}, {name = "buffer"}
+            }),
+            formatting = {
+                format = lspkind.cmp_format({
+                    mode = "symbol_text",
+                    maxwidth = 70,
+                    show_labelDetails = true
+                })
+            }
+        })
+
 		vim.api.nvim_create_autocmd('LspAttach', {
 			group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
 			callback = function(event)
@@ -113,11 +155,11 @@ return {
 			  map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
 
 			  -- Find references for the word under your cursor.
-			  map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+			  -- map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
 
 			  -- Jump to the implementation of the word under your cursor.
 			  --  Useful when your language has ways of declaring types without an actual implementation.
-			  map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+			  -- map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
 			
 			  -- Jump to the type of the word under your cursor.
 			  --  Useful when you're not sure what type a variable is and you want to see
