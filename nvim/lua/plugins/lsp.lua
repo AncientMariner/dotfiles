@@ -12,6 +12,7 @@ vim.pack.add({
 	"https://github.com/saadparwaiz1/cmp_luasnip",
 	"https://github.com/j-hui/fidget.nvim",
 	"https://github.com/ray-x/lsp_signature.nvim",
+	"https://github.com/onsails/lspkind-nvim",
 })
 
 -- Setup conform for formatting
@@ -97,10 +98,50 @@ require("mason-lspconfig").setup({
 		["tailwindcss"] = function()
 			local lspconfig = require("lspconfig")
 			lspconfig.tailwindcss.setup({
-				capabilities = capabilities,
-				filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte", "heex" },
+				capabilities = capabilities, filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte", "heex" },
 			})
 		end,
+	}
+})
+
+local cmp = require("cmp")
+local lspkind = require("lspkind")
+
+cmp.setup({
+	snippet = {
+		expand = function(args)
+			luasnip.lsp_expand(args.body)
+		end
+	},
+	window = {
+		completion = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered()
+	},
+	mapping = cmp.mapping.preset.insert({
+		["<C-b>"] = cmp.mapping.scroll_docs(-4),
+		["<C-f>"] = cmp.mapping.scroll_docs(4),
+		["<C-Space>"] = cmp.mapping.complete(),
+		["<C-e>"] = cmp.mapping.abort(),
+		["<CR>"] = cmp.mapping.confirm({select = true}),
+		["<Tab>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_next_item()
+			elseif luasnip.locally_jumpable(1) then
+				luasnip.jump(1)
+			else
+				fallback()
+			end
+		end, {"i", "s"})
+	}),
+	sources = cmp.config.sources({
+		{name = "nvim_lsp"}, {name = "luasnip"}, {name = "buffer"}
+	}),
+	formatting = {
+		format = lspkind.cmp_format({
+			mode = "symbol_text",
+			maxwidth = 70,
+			show_labelDetails = true
+		})
 	}
 })
 
