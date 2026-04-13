@@ -88,6 +88,7 @@ vim.g.treesitter_highlight_enable = true
 vim.schedule(function()
 	-- Try to require treesitter configs
 	-- local ok_ts, ts_configs = pcall(require, "nvim-treesitter.configs")
+	-- local ok_ts, ts_configs = pcall(require, "nvim-treesitter")
 	--
 	-- if ok_ts and ts_configs then
 	-- 	ts_configs.setup({
