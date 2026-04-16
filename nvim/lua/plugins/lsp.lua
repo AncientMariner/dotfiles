@@ -183,8 +183,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 		-- Execute a code action, usually your cursor needs to be on top of an error
 		-- or a suggestion from your LSP for this to activate.
-		-- using inline one, uncomment if want to use this
-		-- map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
+		map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
 
 		-- WARN: This is not Goto Definition, this is Goto Declaration.
 		--  For example, in C this would take you to the header.
@@ -228,6 +227,17 @@ vim.api.nvim_create_autocmd('LspAttach', {
 				vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
 			end, '[T]oggle Inlay [H]ints')
 		end
+
+		-- Format current buffer
+		map('<leader>ggf', vim.lsp.buf.format, '[G]o [F]ormat')
+
+		-- Organize imports
+		map('<leader>ggi', function()
+			vim.lsp.buf.code_action({
+				context = { only = { "source.organizeImports" } },
+				apply = true,
+			})
+		end, '[G]o [I]mports')
 
 	end,
 })
