@@ -181,7 +181,17 @@ return {
 			  -- Execute a code action, usually your cursor needs to be on top of an error
 			  -- or a suggestion from your LSP for this to activate.
 			  -- using inline one, uncomment if want to use this
-		      -- map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
+		      map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
+
+			  map('<leader>ggf', vim.lsp.buf.format, '[F]ormat [F]ile')
+
+				-- Organize imports
+		      map('<leader>ggi', function()
+			    vim.lsp.buf.code_action({
+		          context = { only = { "source.organizeImports" } },
+				  apply = true,
+				})
+	          end, '[G]o [I]mports')
 
 			  -- WARN: This is not Goto Definition, this is Goto Declaration.
 			  --  For example, in C this would take you to the header.
