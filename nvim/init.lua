@@ -20,3 +20,5 @@ vim.api.nvim_create_autocmd('FileType', {
 	end,
 })
 -- vim.g.copilot_settings = { selectedCompletionModel = 'gpt-4o-copilot' }
+-- vim.g.copilot_settings = { selectedCompletionModel = "github-copilot/claude-sonnet-4.5" }
+-- vim.g.copilot_integration_id = "vscode-chat"
