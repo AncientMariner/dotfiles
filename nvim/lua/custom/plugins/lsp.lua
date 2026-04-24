@@ -38,68 +38,94 @@ return {
                 -- "vtsls",
                 "tailwindcss",
             },
-            handlers = {
-                function(server_name) -- default handler (optional)
-                    require("lspconfig")[server_name].setup {
-                        capabilities = capabilities
-                    }
-                end,
-
-                zls = function()
-                    local lspconfig = require("lspconfig")
-                    lspconfig.zls.setup({
-                        root_dir = lspconfig.util.root_pattern(".git", "build.zig", "zls.json"),
-                        settings = {
-                            zls = {
-                                enable_inlay_hints = true,
-                                enable_snippets = true,
-                                warn_style = true,
-                            },
-                        },
-                    })
-                    vim.g.zig_fmt_parse_errors = 0
-                    vim.g.zig_fmt_autosave = 0
-
-                end,
-                ["lua_ls"] = function()
-                    local lspconfig = require("lspconfig")
-
-                    lspconfig.lua_ls.setup {
-                        capabilities = capabilities,
-                        settings = {
-                            Lua = {
-                                runtime = {
-                                    version = 'LuaJIT',
-                                },
-                                diagnostics = {
-                                    globals = { 'vim' },
-                                },
-                                workspace = {
-                                    library = vim.api.nvim_get_runtime_file("", true),
-                                    checkThirdParty = false,
-                                },
-                                format = {
-                                    enable = true,
-                                    -- Put format options here
-                                    -- NOTE: the value should be STRING!!
-                                    defaultConfig = {
-                                        indent_style = "space",
-                                        indent_size = "2",
-                                    }
-                                },
-                            }
-                        }
-                    }
-                end,
-                ["tailwindcss"] = function()
-                    local lspconfig = require("lspconfig")
-                    lspconfig.tailwindcss.setup({
-                        capabilities = capabilities,
-                        filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte", "heex" },
-                    })
-                end,
-            }
         })
+
+        -- Configure gopls with inlay hints using modern vim.lsp.config
+        vim.lsp.config.gopls = {
+            cmd = { 'gopls' },
+            filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
+            root_markers = { 'go.work', 'go.mod', '.git' },
+            capabilities = capabilities,
+            settings = {
+                gopls = {
+                    hints = {
+                        assignVariableTypes = true,
+                        compositeLiteralFields = true,
+                        compositeLiteralTypes = true,
+                        constantValues = true,
+                        functionTypeParameters = true,
+                        parameterNames = true,
+                        rangeVariableTypes = true,
+                    },
+                },
+            },
+        }
+
+        -- Configure zls using modern vim.lsp.config
+        vim.lsp.config.zls = {
+            cmd = { 'zls' },
+            filetypes = { 'zig', 'zir' },
+            root_markers = { 'zls.json', 'build.zig', '.git' },
+            capabilities = capabilities,
+            settings = {
+                zls = {
+                    enable_inlay_hints = true,
+                    enable_snippets = true,
+                    warn_style = true,
+                },
+            },
+        }
+
+        -- Configure tailwindcss using modern vim.lsp.config
+        vim.lsp.config.tailwindcss = {
+            cmd = { 'tailwindcss-language-server', '--stdio' },
+            filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte", "heex" },
+            root_markers = { 'tailwind.config.js', 'tailwind.config.cjs', 'tailwind.config.mjs', 'tailwind.config.ts', 'postcss.config.js', 'postcss.config.cjs', 'postcss.config.mjs', 'postcss.config.ts', '.git' },
+            capabilities = capabilities,
+        }
+
+        -- Configure lua_ls with deferred library loading to avoid blocking startup
+        vim.lsp.config.lua_ls = {
+            cmd = { 'lua-language-server' },
+            filetypes = { 'lua' },
+            root_markers = { '.luarc.json', '.luarc.jsonc', '.luacheckrc', '.stylua.toml', 'stylua.toml', 'selene.toml', 'selene.yml', '.git' },
+            capabilities = capabilities,
+            on_init = function(client)
+                -- Defer loading runtime files until after server starts
+                vim.schedule(function()
+                    if client and client.workspace_did_change_configuration then
+                        client.config.settings.Lua.workspace.library = vim.api.nvim_get_runtime_file("", true)
+                        client.notify('workspace/didChangeConfiguration', { settings = client.config.settings })
+                    end
+                end)
+            end,
+            settings = {
+                Lua = {
+                    runtime = {
+                        version = 'LuaJIT',
+                    },
+                    diagnostics = {
+                        globals = { 'vim' },
+                    },
+                    workspace = {
+                        checkThirdParty = false,
+                    },
+                    format = {
+                        enable = true,
+                        -- Put format options here
+                        -- NOTE: the value should be STRING!!
+                        defaultConfig = {
+                            indent_style = "space",
+                            indent_size = "2",
+                        }
+                    },
+                }
+            }
+        }
+
+        -- Set Zig-specific options
+        vim.g.zig_fmt_parse_errors = 0
+        vim.g.zig_fmt_autosave = 0
 
         local cmp = require("cmp")
         local lspkind = require("lspkind")
@@ -183,6 +209,10 @@ return {
 			  -- using inline one, uncomment if want to use this
 		      map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
 
+			  -- WARN: This is not Goto Definition, this is Goto Declaration.
+			  --  For example, in C this would take you to the header.
+			  map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+
 			  map('<leader>ggf', vim.lsp.buf.format, '[F]ormat [F]ile')
 
 				-- Organize imports
@@ -192,11 +222,6 @@ return {
 				  apply = true,
 				})
 	          end, '[G]o [I]mports')
-
-			  -- WARN: This is not Goto Definition, this is Goto Declaration.
-			  --  For example, in C this would take you to the header.
-			  map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-
 			  -- The following two autocommands are used to highlight references of the
 			  -- word under your cursor when your cursor rests there for a little while.
 			  --    See `:help CursorHold` for information about when this is executed
@@ -226,17 +251,22 @@ return {
 				})
 			  end
 
-			  -- The following code creates a keymap to toggle inlay hints in your
-			  -- code, if the language server you are using supports them
-			  --
-			  -- This may be unwanted, since they displace some of your code
-			  if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
-				map('<leader>th', function()
-				  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
-				end, '[T]oggle Inlay [H]ints')
-			  end
+		  -- The following code creates a keymap to toggle inlay hints in your
+		  -- code, if the language server you are using supports them
+		  --
+		  -- This may be unwanted, since they displace some of your code
+		  if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+			map('<leader>th', function()
+			  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
+			end, '[T]oggle Inlay [H]ints')
 
-		end,
+			-- Auto-enable inlay hints for gopls
+			if client.name == "gopls" then
+				vim.lsp.inlay_hint.enable(false, { bufnr = event.buf })
+			end
+		  end
+
+	end,
       })
 
 		-- LSP servers and clients are able to communicate to each other what features they support.
