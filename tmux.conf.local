@@ -90,34 +90,34 @@ tmux_conf_24b_colour=auto
 # default theme
 tmux_conf_theme_colour_catpc_base="#1e1e2e"    
 tmux_conf_theme_colour_catpc_mantle="#181825"  
-tmux_conf_theme_colour_1="#080808"    # dark gray
-tmux_conf_theme_colour_2="#303030"    # gray
+tmux_conf_theme_colour_dark_gray="#080808"
+tmux_conf_theme_colour_gray_alt="#303030"
 tmux_conf_theme_colour_gray="#404040" 
-tmux_conf_theme_colour_3="#8a8a8a"    # light gray
-tmux_conf_theme_colour_4="#26619c" # "#00afff"    # light blue
+tmux_conf_theme_colour_light_gray="#8a8a8a"
+tmux_conf_theme_colour_light_blue="#26619c"
 tmux_conf_theme_colour_lapis_lazuli="#26619c"
-tmux_conf_theme_colour_5="#ffd400"  # "#ffff00"    # yellow
+tmux_conf_theme_colour_yellow="#ffd400"
 tmux_conf_theme_colour_lemon_zest="#ffd400"
-tmux_conf_theme_colour_6="#080808"    # dark gray
-tmux_conf_theme_colour_7="#080808" # "#e4e4e4"    # white
+tmux_conf_theme_colour_dark_gray_alt="#080808"
+tmux_conf_theme_colour_dark_gray_alt2="#080808"
 tmux_conf_theme_colour_vamp_black="#080808"
-tmux_conf_theme_colour_8="#080808"    # dark gray
-tmux_conf_theme_colour_9="#8d4004" # "#cc7722"  # "#ffff00"    # yellow
+tmux_conf_theme_colour_dark_gray_alt3="#080808"
+tmux_conf_theme_colour_orange="#8d4004"
 tmux_conf_theme_colour_rust="#8d4004"
 tmux_conf_theme_colour_denim="#151e3d"
 tmux_conf_theme_colour_aegean="#1f456e"
 tmux_conf_theme_colour_prussian="#003153"
-tmux_conf_theme_colour_10="#7a3803" # "#ff00af"   # pink
+tmux_conf_theme_colour_brown="#7a3803"
 tmux_conf_theme_colour_spice="#7a3803"
-tmux_conf_theme_colour_11="#cc7722" # "#5fff00"   # green
+tmux_conf_theme_colour_orange_alt="#cc7722"
 tmux_conf_theme_colour_ochre="#cc7722"
-tmux_conf_theme_colour_12="#8a8a8a"   # light gray
-tmux_conf_theme_colour_13="#e4e4e4"   # white
-tmux_conf_theme_colour_14="#080808"   # dark gray
-tmux_conf_theme_colour_15="#080808"   # dark gray
-tmux_conf_theme_colour_16="#00563f"  # "#420d09" # "#d70000"   # red
+tmux_conf_theme_colour_light_gray_alt="#8a8a8a"
+tmux_conf_theme_colour_white="#e4e4e4"
+tmux_conf_theme_colour_dark_gray_alt4="#080808"
+tmux_conf_theme_colour_dark_gray_alt5="#080808"
+tmux_conf_theme_colour_green="#00563f"
 tmux_conf_theme_colour_castleton_green="#00563f"
-tmux_conf_theme_colour_17="#e3dac9" # "#e4e4e4"   # white
+tmux_conf_theme_colour_beige="#e3dac9"
 tmux_conf_theme_colour_bone_white="#e3dac9"
 tmux_conf_theme_colour_stone="#59788e"
 tmux_conf_theme_colour_cerulean="#0492c2"
@@ -151,7 +151,7 @@ tmux_conf_theme_window_bg="default"
 tmux_conf_theme_highlight_focused_pane=false
 
 # focused pane colours:
-tmux_conf_theme_focused_pane_bg="$tmux_conf_theme_colour_2"
+tmux_conf_theme_focused_pane_bg="$tmux_conf_theme_colour_gray_alt"
 
 # pane border style, possible values are:
 #   - thin (default)
@@ -159,7 +159,7 @@ tmux_conf_theme_focused_pane_bg="$tmux_conf_theme_colour_2"
 tmux_conf_theme_pane_border_style=thin
 
 # pane borders colours:
-tmux_conf_theme_pane_border="$tmux_conf_theme_colour_2"
+tmux_conf_theme_pane_border="$tmux_conf_theme_colour_gray_alt"
 tmux_conf_theme_pane_active_border="$tmux_conf_theme_colour_lapis_lazuli"
 %if #{>=:#{version},3.2}
 tmux_conf_theme_pane_active_border="#{?pane_in_mode,$tmux_conf_theme_colour_rust,#{?synchronize-panes,$tmux_conf_theme_colour_castleton_green,$tmux_conf_theme_colour_lapis_lazuli}}"
@@ -184,7 +184,7 @@ tmux_conf_theme_mode_fg="$tmux_conf_theme_colour_catpc_base"
 tmux_conf_theme_mode_bg="$tmux_conf_theme_colour_lemon_zest"
 tmux_conf_theme_mode_attr="bold"
 
-# status line style
+# status line style top
 tmux_conf_theme_status_fg="$tmux_conf_theme_colour_catpc_mantle"
 tmux_conf_theme_status_bg="$tmux_conf_theme_colour_catpc_base"
 tmux_conf_theme_status_attr="none"
@@ -248,7 +248,7 @@ tmux_conf_theme_window_status_bell_attr="blink,bold"
 
 # window last status style
 tmux_conf_theme_window_status_last_fg="$tmux_conf_theme_colour_lapis_lazuli"
-tmux_conf_theme_window_status_last_bg="$tmux_conf_theme_colour_2"
+tmux_conf_theme_window_status_last_bg="$tmux_conf_theme_colour_gray_alt"
 tmux_conf_theme_window_status_last_attr="none"
 
 # status left/right sections separators
@@ -301,7 +301,7 @@ tmux_conf_theme_status_left_bg="$tmux_conf_theme_colour_denim,$tmux_conf_theme_c
 tmux_conf_theme_status_left_attr="bold,none,none"
 
 # status right style
-tmux_conf_theme_status_right_fg="$tmux_conf_theme_colour_12,$tmux_conf_theme_colour_13,$tmux_conf_theme_colour_14"
+tmux_conf_theme_status_right_fg="$tmux_conf_theme_colour_light_gray_alt,$tmux_conf_theme_colour_white,$tmux_conf_theme_colour_dark_gray_alt4"
 tmux_conf_theme_status_right_bg="$tmux_conf_theme_colour_catpc_mantle,$tmux_conf_theme_colour_lapis_lazuli,$tmux_conf_theme_colour_stone"
 tmux_conf_theme_status_right_attr="none,none,bold"
 
