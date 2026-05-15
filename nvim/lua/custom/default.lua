@@ -12,7 +12,7 @@ vim.opt.shiftwidth = 4
 vim.opt.swapfile = false
 vim.opt.backup = false
 -- vim.opt.undodir = OS.getenv("HOME") .. "~/.vim/undodir"
-vim.opt.undodir = "full path to ~/.vim/undodir not with ~"
+vim.opt.undodir = "/Users/I345742/.vim/undodir"
 vim.opt.undofile = true
 
 vim.opt.hlsearch = false
@@ -28,7 +28,7 @@ vim.opt.relativenumber = true
 vim.opt.laststatus = 2
 vim.opt.vb = true
 vim.opt.ruler = true
-vim.opt.spell = true
+-- vim.opt.spell = true
 vim.opt.spelllang = "en_us"
 vim.opt.autoindent = true
 -- vim.opt.colorcolumn = "120"

@@ -62,19 +62,19 @@ return {
         }
 
         -- Configure zls using modern vim.lsp.config
-        vim.lsp.config.zls = {
-            cmd = { 'zls' },
-            filetypes = { 'zig', 'zir' },
-            root_markers = { 'zls.json', 'build.zig', '.git' },
-            capabilities = capabilities,
-            settings = {
-                zls = {
-                    enable_inlay_hints = true,
-                    enable_snippets = true,
-                    warn_style = true,
-                },
-            },
-        }
+        -- vim.lsp.config.zls = {
+        --     cmd = { 'zls' },
+        --     filetypes = { 'zig', 'zir' },
+        --     root_markers = { 'zls.json', 'build.zig', '.git' },
+        --     capabilities = capabilities,
+        --     settings = {
+        --         zls = {
+        --             enable_inlay_hints = true,
+        --             enable_snippets = true,
+        --             warn_style = true,
+        --         },
+        --     },
+        -- }
 
         -- Configure tailwindcss using modern vim.lsp.config
         vim.lsp.config.tailwindcss = {

@@ -6,6 +6,9 @@ function ColorMyPencils(color)
 
 	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+
+    vim.api.nvim_set_hl(0, "LineNr", { fg = "#7f849c" })
+    vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#7f849c", bold = true })
 end
 
 return {
