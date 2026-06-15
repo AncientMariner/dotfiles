@@ -77,9 +77,10 @@ return {
                     mappings = { -- extend mappings
                       i = {
 						 -- "attestation" -tmd api
-                        ["<C-k>"] = lga_actions.quote_prompt(),
+                        -- ["<C-k>"] = lga_actions.quote_prompt(),
 							-- "attestation" --iglob **md**
                         ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),                        -- freeze the current list and start a fuzzy search in the frozen list
+                        ["<C-y>"] = lga_actions.quote_prompt({ postfix = " --type " }),                        -- freeze the current list and start a fuzzy search in the frozen list
                         ["<C-space>"] = actions.to_fuzzy_refine,
                       },
                     },
@@ -126,6 +127,13 @@ return {
 		map("n", "<leader>sp", function() builtin.grep_string({ search = vim.fn.input("Grep > ") }); end, {desc = "[s]earch [p]rompt"})
         map("n", '<leader>sg', builtin.live_grep, {noremap = true, silent = true, desc = "[s]earch by [g]rep"})
 		map("n", "<leader>sG", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", {desc = "[s]earch by [G]rep arguments"})
+		map("n", "<leader>sb", function()
+			builtin.live_grep({
+				prompt_title = "Search in Go files",
+				type_filter = "go",
+				glob_pattern = "*.go"
+			})
+		end, {desc = "[s]earch in [go] files"})
 
 		map("n", "<leader>fx", builtin.treesitter, {noremap = true, silent = true, desc = "List tree sitter symbols"}) -- Lists tree-sitter symbols
         map("n", "<leader>fs", builtin.spell_suggest, {noremap = true, silent = true, desc = "Spelling suggestions"}) -- Lists spell options
