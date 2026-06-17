@@ -37,6 +37,7 @@
  # graph = log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"
   #hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
   hist= log --graph --pretty=format:'%Cblue%h%Creset -%C(yellow)%d%Creset %s %C(green)%an%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+  parent= log --graph --pretty=oneline --abbrev-commit --first-parent --all
   st = status
   stash-unapply = !git stash show -p | git apply -R
   br = branch
