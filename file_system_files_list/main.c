@@ -89,8 +89,6 @@ void walk(const wchar_t *dir, const wchar_t *prefix, int maxDepth, int currentDe
             continue;
         if (!showHidden && ffd.cFileName[0] == L'.')
             continue;
-        if (!showHidden && (ffd.dwFileAttributes & FILE_ATTRIBUTE_HIDDEN))
-            continue;
         if (count < 4096) {
             wcsncpy(entries[count], ffd.cFileName, MAX_PATH - 1);
             entries[count][MAX_PATH - 1] = L'\0';
