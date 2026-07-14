@@ -31,6 +31,10 @@ func walk(sb *strings.Builder, dir, prefix string, maxDepth, currentDepth int, s
 
 	entries, err := os.ReadDir(dir)
 	if err != nil {
+		if os.IsPermission(err) {
+			fmt.Fprintf(sb, "%s[permission denied]\n", prefix)
+			return nil
+		}
 		return fmt.Errorf("cannot read dir %q: %w", dir, err)
 	}
 
@@ -63,7 +67,11 @@ func walk(sb *strings.Builder, dir, prefix string, maxDepth, currentDepth int, s
 
 		if entry.IsDir() {
 			if err := walk(sb, filepath.Join(dir, entry.Name()), childPrefix, maxDepth, currentDepth+1, showHidden); err != nil {
-				return err
+				if os.IsPermission(err) {
+					fmt.Fprintf(sb, "%s[permission denied]\n", childPrefix)
+				} else {
+					return err
+				}
 			}
 		}
 	}
