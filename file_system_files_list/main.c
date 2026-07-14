@@ -80,8 +80,14 @@ void walk(const wchar_t *dir, const wchar_t *prefix, int maxDepth, int currentDe
         return;
     }
 
-    wchar_t entries[4096][MAX_PATH];
-    DWORD attrs[4096];
+    wchar_t (*entries)[MAX_PATH] = (wchar_t (*)[MAX_PATH])HeapAlloc(GetProcessHeap(), 0, 4096 * MAX_PATH * sizeof(wchar_t));
+    DWORD *attrs = (DWORD *)HeapAlloc(GetProcessHeap(), 0, 4096 * sizeof(DWORD));
+    if (!entries || !attrs) {
+        if (entries) HeapFree(GetProcessHeap(), 0, entries);
+        if (attrs) HeapFree(GetProcessHeap(), 0, attrs);
+        FindClose(hFind);
+        return;
+    }
     int count = 0;
 
     do {
@@ -118,6 +124,9 @@ void walk(const wchar_t *dir, const wchar_t *prefix, int maxDepth, int currentDe
             walk(childDir, childPrefix, maxDepth, currentDepth + 1);
         }
     }
+
+    HeapFree(GetProcessHeap(), 0, entries);
+    HeapFree(GetProcessHeap(), 0, attrs);
 }
 
 int wmain(int argc, wchar_t *argv[]) {
