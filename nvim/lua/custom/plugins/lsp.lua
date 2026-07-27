@@ -37,6 +37,7 @@ return {
                 "gopls",
                 -- "vtsls",
                 "tailwindcss",
+				"pyright",
             },
         })
 
@@ -61,6 +62,37 @@ return {
             },
         }
 
+		vim.lsp.config.pyright = {
+			   cmd = { 'pyright-langserver', '--stdio' },
+			   filetypes = { 'python' },
+			   root_markers = { 'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt', 'Pipfile', 'pyrightconfig.json', '.git' },
+			   capabilities = capabilities,
+				on_new_config = function(config, root_dir)
+					config.settings = config.settings or {}
+					config.settings.python = config.settings.python or {}
+					
+					-- Check for common virtual environment names
+					local venv_names = { ".venv", "venv", "env", ".env" }
+					for _, name in ipairs(venv_names) do
+						local venv_path = root_dir .. "/" .. name .. "/bin/python"
+						if vim.fn.filereadable(venv_path) == 1 then
+							config.settings.python.pythonPath = venv_path
+							break
+						end
+					end
+				end,
+				settings = {
+					   python = {
+						   analysis = {
+							   autoSearchPaths = true,
+							   useLibraryCodeForTypes = true,
+							   -- diagnosticMode = 'workspace',
+							   diagnosticMode = 'openFilesOnly',
+							   typeCheckingMode = 'basic',
+						   },
+					   },
+				   },
+		   }
         -- Configure zls using modern vim.lsp.config
         -- vim.lsp.config.zls = {
         --     cmd = { 'zls' },
