@@ -224,8 +224,12 @@ grapheme-width-method = unicode
 # Any additional colors specified via background, foreground, palette, etc.
 # will override the colors specified in the theme.
 # theme = rose-pine-dawn
-theme = catppuccin-mocha
-# theme = gruvboxlight
+# theme = Catppuccin Mocha
+theme = Black Metal
+# theme = gruvbox light
+# theme = gruvbox dark
+# theme = tokyonight_night
+# theme = rose pine
 
 # Swap the foreground and background colors of cells for selection. This
 # option overrides the `selection-foreground` and `selection-background`
@@ -602,7 +606,7 @@ keybind = alt+p=text:\u{001B}p
 # keybind = alt+shift+right_bracket=text:\u{001B}]
 
 # fix ctrl+key
-# keybind = ctrl+a=text:\u{0001}
+keybind = ctrl+a=text:\u{0001}
 # keybind = ctrl+b=text:\u{0002}
 # keybind = ctrl+c=text:\u{0003}
 # keybind = ctrl+d=text:\u{0004}
@@ -792,9 +796,9 @@ keybind = alt+p=text:\u{001B}p
 # will appear in the logs.
 #
 # Changing these values will only apply after restart.
-window-padding-x = 10
+window-padding-x = 0,5
 
-window-padding-y = 8
+window-padding-y = 0,5
 # The viewport dimensions are usually not perfectly divisible by the cell
 # size. In this case, some extra padding on the end of a column and the bottom
 # of the final row may exist. If this is `true`, then this extra padding
@@ -1298,7 +1302,7 @@ gtk-wide-tabs = true
 #
 # This configuration only has an effect if Ghostty was built with
 # libadwaita support.
-gtk-adwaita = true
+# gtk-adwaita = true
 
 # If `true` (default), applications running in the terminal can show desktop
 # notifications using certain escape sequences such as OSC 9 or OSC 777.

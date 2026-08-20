@@ -42,8 +42,8 @@ return {
 	-- particle_gravity = 60,
 		--
     -- burning cursor
-	-- cursor_color = "#ff4000",
-	cursor_color = "#006CF0",
+	cursor_color = "#ff4000",
+	-- cursor_color = "#006CF0",
 	particles_enabled = true,
 	stiffness = 0.5,
 	trailing_stiffness = 0.2,
