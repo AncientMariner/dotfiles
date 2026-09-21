@@ -1,5 +1,9 @@
 return {
     "tpope/vim-fugitive",
+    cmd = { "Git", "G" },
+	keys = {
+		{ "<leader>gs", vim.cmd.Git, desc = "[G]it [s]tatus" },
+	},
     dependencies = {
     },
     config = function()

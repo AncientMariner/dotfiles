@@ -6,7 +6,13 @@ return {
 	    "nvim-neotest/nvim-nio",
 		"rcarriga/nvim-dap-ui"
     },
-    lazy = false,
+	--  lazy = false,
+    keys = {
+        { "<Leader>dc", function() require("dap").continue() end,          desc = "Continue debug" },
+        { "<Leader>db", function() require("dap").set_breakpoint() end,    desc = "Set breakpoint" },
+        { "<Leader>dv", function() require("dap").toggle_breakpoint() end, desc = "Toggle breakpoint" },
+        { "<Leader>dl", function() require("dap").run_last() end,          desc = "Run last" },
+    },
     config = function()
 		local dap, dapui = require('dap'), require('dapui')
 		local dapgo = require('dap-go')
