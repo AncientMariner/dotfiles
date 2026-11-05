@@ -38,6 +38,7 @@ return {
                 -- "vtsls",
                 "tailwindcss",
 				"pyright",
+                "jdtls",
             },
         })
 

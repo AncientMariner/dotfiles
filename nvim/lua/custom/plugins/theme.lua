@@ -42,6 +42,32 @@ local c_bm_dark_stone  = "#626b67"
 local c_bm_sand        = "#aa9988"
 local c_bm_olive       = "#777755"
 
+local c_white       = "#f5f5f0"
+local c_near_white  = "#e8e8e3"
+local c_light_stone = "#d0d0c8"
+local c_stone       = "#888880"
+local c_dim         = "#555550"
+local c_dark_dim    = "#1c1c18"
+
+-- white metal palettes (light bg, dark accents)
+local c_wm_forest_kw  = "#1e5c40"
+local c_wm_forest_str = "#3d2b10"
+local c_wm_forest_sp  = "#7a3010"
+
+local c_wm_ash_kw     = "#1e3d55"
+local c_wm_ash_str    = "#1a2a38"
+local c_wm_ash_sp     = "#4a2860"
+
+local c_wm_bone_kw    = "#4a2e00"
+local c_wm_bone_str   = "#2a1800"
+local c_wm_bone_sp    = "#6b1a10"
+
+local white_metal_palettes = {
+    ["white-metal"]        = { kw = c_wm_forest_kw, str = c_wm_forest_str, sp = c_wm_forest_sp },
+    ["white-metal-ash"]    = { kw = c_wm_ash_kw,    str = c_wm_ash_str,    sp = c_wm_ash_sp    },
+    ["white-metal-bone"]   = { kw = c_wm_bone_kw,   str = c_wm_bone_str,   sp = c_wm_bone_sp   },
+}
+
 local black_metal_palettes = {
     ["black-metal"]             = { kw = c_teal_dark,   str = c_bm_rose,      sp = c_bm_dusty_rose },
     ["black-metal-venom"]       = { kw = c_teal,        str = c_bm_off_white,  sp = c_bm_dark_red   },
@@ -55,6 +81,30 @@ local black_metal_palettes = {
     ["black-metal-marduk"]      = { kw = c_teal,        str = c_bm_stone,      sp = c_bm_dark_stone },
     ["black-metal-nile"]        = { kw = c_teal,        str = c_bm_sand,       sp = c_bm_olive      },
 }
+
+local function apply_white_metal(p)
+    vim.cmd.colorscheme("default")
+    local hl = vim.api.nvim_set_hl
+    hl(0, "Normal",       { fg = c_dark_dim,   bg = c_white })
+    hl(0, "NormalFloat",  { fg = c_dark_dim,   bg = c_near_white })
+    hl(0, "Comment",      { fg = c_stone })
+    hl(0, "Constant",     { fg = p.str })
+    hl(0, "String",       { fg = p.str })
+    hl(0, "Identifier",   { fg = c_dark_dim })
+    hl(0, "Function",     { fg = c_dim })
+    hl(0, "Statement",    { fg = p.kw })
+    hl(0, "Keyword",      { fg = p.kw })
+    hl(0, "Type",         { fg = c_dim })
+    hl(0, "Special",      { fg = p.sp })
+    hl(0, "LineNr",       { fg = c_stone })
+    hl(0, "CursorLineNr", { fg = c_dim, bold = true })
+    hl(0, "Visual",       { fg = c_white,      bg = c_dim })
+    hl(0, "Search",       { fg = c_white,      bg = p.sp })
+    hl(0, "StatusLine",   { fg = c_dark_dim,   bg = c_light_stone })
+    hl(0, "Pmenu",        { fg = c_dark_dim,   bg = c_near_white })
+    hl(0, "PmenuSel",     { fg = c_white,      bg = p.kw })
+    hl(0, "TelescopeSelection", { fg = c_white, bg = p.sp })
+end
 
 local function apply_black_metal(p)
     vim.cmd.colorscheme("default")
@@ -77,20 +127,27 @@ local function apply_black_metal(p)
     hl(0, "StatusLine",   { fg = c_light_gray, bg = c_black })
     hl(0, "Pmenu",        { fg = c_light_gray, bg = c_black })
     hl(0, "PmenuSel",     { fg = c_black,      bg = p.kw })
+	hl(0, "TelescopeSelection", { fg = c_black, bg = p.sp })
 end
 
 function ColorMyPencils(color)
 	-- color = color or "rose-pine-moon"
  	-- color = color or "catppuccin"
- 	color = color or "black-metal-bathory"
+ 	color = color or "black-metal-nile"
 	-- color = color or "gruvbox"
+	-- color = color or "white-metal"
+	-- color = color or "brightburn"
+
 	local bm = black_metal_palettes[color]
+	local wm = white_metal_palettes[color]
 	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 	vim.api.nvim_set_hl(0, "LineNr", { fg = "#7f849c" })
 	vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#7f849c", bold = true })
 	if bm then
 		apply_black_metal(bm)
+	elseif wm then
+		apply_white_metal(wm)
 	else
 		vim.cmd.colorscheme(color)
 	end
